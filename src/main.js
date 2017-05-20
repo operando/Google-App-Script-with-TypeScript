@@ -1,0 +1,45 @@
+"use strict";
+var calId = "okanoshinobu8@gmail.com";
+var PostEvent = (function () {
+    function PostEvent() {
+    }
+    return PostEvent;
+}());
+function _test() {
+    var e = new PostEvent;
+    e.postData = {
+        length: 0,
+        type: "",
+        contents: '{"title":"sample title", "startTime": "2017-05-21T09:00:00.000Z", "endTime": "2017-05-21T12:00:00.000Z"}',
+        name: ""
+    };
+    // Logger.log(doPost(e));
+    createEvent(createCalenderEvent(e));
+}
+var CalenderEvent = (function () {
+    function CalenderEvent() {
+    }
+    return CalenderEvent;
+}());
+function doPost(e) {
+    var ce = new CalenderEvent;
+    var contents = JSON.parse(e.postData.contents);
+    ce.title = contents.title;
+    ce.startTime = new Date(contents.startTime);
+    ce.endTime = new Date(contents.endTime);
+    var r = JSON.stringify(ce);
+    return ContentService.createTextOutput(r);
+}
+function createCalenderEvent(e) {
+    var ce = new CalenderEvent;
+    var contents = JSON.parse(e.postData.contents);
+    ce.title = contents.title;
+    ce.startTime = new Date(contents.startTime);
+    ce.endTime = new Date(contents.endTime);
+    return ce;
+}
+function createEvent(e) {
+    CalendarApp.getCalendarById(calId)
+        .createEvent(e.title, e.startTime, e.endTime);
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uL2Rldi9tYWluLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxJQUFNLEtBQUssR0FBRyx5QkFBeUIsQ0FBQztBQUV4QztJQUFBO0lBV0EsQ0FBQztJQUFELGdCQUFDO0FBQUQsQ0FBQyxBQVhELElBV0M7QUFFRDtJQUNJLElBQUksQ0FBQyxHQUFHLElBQUksU0FBUyxDQUFDO0lBQ3RCLENBQUMsQ0FBQyxRQUFRLEdBQUc7UUFDVCxNQUFNLEVBQUUsQ0FBQztRQUNULElBQUksRUFBRSxFQUFFO1FBQ1IsUUFBUSxFQUFFLDBHQUEwRztRQUNwSCxJQUFJLEVBQUUsRUFBRTtLQUNYLENBQUM7SUFDRix5QkFBeUI7SUFDekIsV0FBVyxDQUFDLG1CQUFtQixDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7QUFDeEMsQ0FBQztBQUVEO0lBQUE7SUFJQSxDQUFDO0lBQUQsb0JBQUM7QUFBRCxDQUFDLEFBSkQsSUFJQztBQUVELGdCQUFnQixDQUFZO0lBQ3hCLElBQUksRUFBRSxHQUFHLElBQUksYUFBYSxDQUFDO0lBQzNCLElBQUksUUFBUSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLFFBQVEsQ0FBQyxRQUFRLENBQUMsQ0FBQztJQUMvQyxFQUFFLENBQUMsS0FBSyxHQUFHLFFBQVEsQ0FBQyxLQUFLLENBQUM7SUFDMUIsRUFBRSxDQUFDLFNBQVMsR0FBRyxJQUFJLElBQUksQ0FBQyxRQUFRLENBQUMsU0FBUyxDQUFDLENBQUM7SUFDNUMsRUFBRSxDQUFDLE9BQU8sR0FBRyxJQUFJLElBQUksQ0FBQyxRQUFRLENBQUMsT0FBTyxDQUFDLENBQUM7SUFFeEMsSUFBSSxDQUFDLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQyxFQUFFLENBQUMsQ0FBQztJQUMzQixNQUFNLENBQUMsY0FBYyxDQUFDLGdCQUFnQixDQUFDLENBQUMsQ0FBQyxDQUFDO0FBQzlDLENBQUM7QUFFRCw2QkFBNkIsQ0FBWTtJQUNyQyxJQUFJLEVBQUUsR0FBRyxJQUFJLGFBQWEsQ0FBQztJQUMzQixJQUFJLFFBQVEsR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxRQUFRLENBQUMsUUFBUSxDQUFDLENBQUM7SUFDL0MsRUFBRSxDQUFDLEtBQUssR0FBRyxRQUFRLENBQUMsS0FBSyxDQUFDO0lBQzFCLEVBQUUsQ0FBQyxTQUFTLEdBQUcsSUFBSSxJQUFJLENBQUMsUUFBUSxDQUFDLFNBQVMsQ0FBQyxDQUFDO0lBQzVDLEVBQUUsQ0FBQyxPQUFPLEdBQUcsSUFBSSxJQUFJLENBQUMsUUFBUSxDQUFDLE9BQU8sQ0FBQyxDQUFDO0lBQ3hDLE1BQU0sQ0FBQyxFQUFFLENBQUM7QUFDZCxDQUFDO0FBRUQscUJBQXFCLENBQWdCO0lBQ2pDLFdBQVcsQ0FBQyxlQUFlLENBQUMsS0FBSyxDQUFDO1NBQzdCLFdBQVcsQ0FDWixDQUFDLENBQUMsS0FBSyxFQUNQLENBQUMsQ0FBQyxTQUFTLEVBQ1gsQ0FBQyxDQUFDLE9BQU8sQ0FDUixDQUFDO0FBQ1YsQ0FBQyJ9

@@ -1,0 +1,17 @@
+{
+  "name": "sample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+     "publish": "npm run build && npm run upload",
+     "build": "npm run tsc",
+     "tsc": "tsc",
+     "upload": "gapps upload"
+   },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/google-apps-script": "0.0.11"
+  }
+}
